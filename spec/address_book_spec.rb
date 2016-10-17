@@ -36,8 +36,23 @@ RSpec.describe AddressBook do
             expect(new_entry.phone_number).to eq('010.012.1815')
             expect(new_entry.email).to eq('augusta.king@lovelace.com')
         end
-        
     end
 
-    
+    describe "#remove_entry" do
+        it "removes entry from the address book" do
+            book = AddressBook.new
+            book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+    #original test had just the expect line .to eq(0) didnt think of adding 2 items to check it
+            name = "Craig Schotch"
+            phone_number = "123.123.1234"
+            email = "example.craig@example.com"
+            book.add_entry(name, phone_number, email)
+            
+            expect(book.entries.size).to eq(2)
+            book.remove_entry(name, phone_number, email)
+            expect(book.entries.size).to eq(1)
+            expect(book.entries.first.name).to eq('Ada Lovelace')
+        end
+    end
+
 end
