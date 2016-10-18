@@ -8,12 +8,13 @@ class MenuController
     end
     
     def main_menu
-        puts 'Main Menu - #{address_book.entries.count} entries'
+        puts "Main Menu - #{address_book.entries.count} entries"
         puts '1 - View all entries'
         puts '2 - Create an entry'
         puts '3 - Search for an entry'
         puts '4 - Import entries from a CSV'
-        puts '5 - Exit'
+        puts '5 - View Entry Number n'
+        puts '6 - Exit'
         print 'Enter your selection: '
         
         selection = gets.to_i
@@ -36,14 +37,16 @@ class MenuController
                 read_csv
                 main_menu
             when 5
+                system 'clear'
+                view_one_entry
+                main_menu
+            when 6
                 puts 'Good-Bye!'
                 exit(0)
-                
             else
                 system 'clear'
                 puts 'Sorry, that is not a valid input'
                 main_menu
-                
         end
     end
     
@@ -86,6 +89,23 @@ class MenuController
     def read_csv
     end
     
+    def view_one_entry
+        puts 'Please enter the number of the entry'
+        one_entry = gets.chomp.to_i
+        
+        if one_entry < @address_book.entries.count
+            # we decrement the user input by 1 due to array indices starting at 0
+            puts @address_book.entries[one_entry - 1]        
+           
+            puts "Press enter to return to the main menu"    #this is from video
+            gets.chomp                                       #this is from video
+            system "clear"                                   #this is from video
+        else
+            puts "#{one_entry} is not a valid input."
+            view_one_entry
+        end
+    end
+    
     def entry_submenu(entry)
         
         puts 'n - next entry'
@@ -106,7 +126,7 @@ class MenuController
             
         else
             system 'clear'
-            puts '#{selection} is not a valid input'
+            puts "#{selection} is not a valid input"
             entry_submenu(entry)
         end
     end
