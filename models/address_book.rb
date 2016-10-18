@@ -7,10 +7,10 @@ class AddressBook
        @entries = [] 
     end
     
-    def add_entry(name, phone_number, email)
+    def add_entry(name, phone_number, email)#function does not check to see if there is a duplicate entry
         index = 0
         entries.each do |entry|
-            #bloc has this as a < due to lexicographically proceeding entry.name will need further explanation
+            #bloc has this as a < due to lexicographically == alphabetical order proceeding entry.name will need further explanation
             if name < entry.name
                 break
             end
