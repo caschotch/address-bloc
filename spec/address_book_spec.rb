@@ -57,6 +57,16 @@ RSpec.describe AddressBook do
         end
     end
     
+    
+    describe "#detonate" do
+        it "removes all entries from the address book" do
+        book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+          
+        book.detonate
+        expect(book.entries.size).to eq (0)
+        end
+    end
+    
     #test that AddressBook's .import_from_csv() method is working as expected
     describe "#import_from_csv" do
         it 'imports the correct number of entries' do

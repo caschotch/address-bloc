@@ -30,7 +30,10 @@ class AddressBook
             end
         end
         entries.delete(delete_entry)
+    end
 
+    def detonate
+        entries.clear
     end
     
     def import_from_csv(file_name)
